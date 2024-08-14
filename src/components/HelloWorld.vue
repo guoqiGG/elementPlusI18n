@@ -1,58 +1,66 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div style="width: 100vw;height:100vh;">
+    <Editor :value="data.value" :locale="zhHans" :plugins="data.plugins" @change="handleChange"
+      :upload-images="handleUploadImages" />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
+<script setup>
+import { reactive } from 'vue';
+import { Editor } from "@bytemd/vue-next";
+import gfm from "@bytemd/plugin-gfm";
+import highlight from "@bytemd/plugin-highlight";
+import gemoji from "@bytemd/plugin-gemoji"
+import mediumZoom from "@bytemd/plugin-medium-zoom"
+import zhHans from 'bytemd/locales/zh_Hans.json'
+import "bytemd/dist/index.css";
+import "highlight.js/styles/default.css";
+import "github-markdown-css/github-markdown-light.css";
+import { uploadImageByBase64 } from '../api/modules/upload.js'
+const plugins = [
+  gfm(),
+  highlight(),
+  gemoji(),
+  mediumZoom()
+]
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+const data = reactive({
+  value: '',
+  plugins
+})
+
+const handleChange = (v) => {
+  data.value = v
+  console.log(data.value)
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+const handleUploadImages = (v) => { // 上传图片 v是一个数组
+  let imgs = aa(v)
+  return imgs
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+const aa = (v) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      const res = await uploadImageByBase64({ base64: event.target.result })
+      let imgs = []
+      imgs.push({
+        title: 111,
+        url: res.data.url
+      })
+      resolve(imgs)
+    };
+    reader.readAsDataURL(v[0]);
+  })
+
 }
-a {
-  color: #42b983;
+
+</script>
+<style>
+.bytemd {
+  width: 100%;
+  height: calc(100vh - 0px);
+  /* 这里的100vh表示视口高度的100%，‌减去50px是为了留出一些空间给页面的其他元素 */
 }
 </style>
