@@ -17,7 +17,7 @@
 3. 在组件中使用aos库，在需要使用动画的元素上添加data-aos="fade-up"属性，即可实现向上淡入的动画效果。
 
    ```
-      <div style="height:500px;" v-for="(item, index) in data" :key="index" data-aos="fade-up">
+    <div style="height:500px;" v-for="(item, index) in data" :key="index" data-aos="fade-up">
       <div>
         <span>{{ item.id }}</span
         ><span>{{ item.name }}</span
