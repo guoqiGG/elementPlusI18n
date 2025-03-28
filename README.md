@@ -1,8 +1,7 @@
 # Vue 3 + Vite + Js + aos + Mockjs
 
 ### 本仓库主要演示了，如何使用Vue3 + Vite + Js + aos + Mockjs 来实现一个简单的动画网站  
-
-##### 描述：vue + animate.js + wowjs 无法实现我们想要得到的效果(基于原生js,而我们使用的是vue单文件组件)，经过一番查找，发现了aos库，于是便开始了探索
+描述：vue + animate.js + wowjs 无法实现我们想要得到的效果(基于原生js,而我们使用的是vue单文件组件)，经过一番查找，发现了aos库，于是便开始了探索
 
 #### 使用教程  
 
