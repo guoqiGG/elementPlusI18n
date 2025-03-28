@@ -27,7 +27,7 @@
     </div>
    ```
 
-更多动画效果可以参考aos库的官方文档。
+更多动画效果可以参考aos库的官方文档。  
 git仓库地址：https://github.com/michalsnik/aos   
 演示网站：https://michalsnik.github.io/aos/  
 官网：https://www.drupal.org/project/aosjs
