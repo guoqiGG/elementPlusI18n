@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height:500px;" v-for="(item, index) in data" :key="index" data-aos="zoom-in-left">
+    <div style="height: 500px" v-for="(item, index) in data" :key="index" data-aos="zoom-in-left">
       <div>
         <span>{{ item.id }}</span
         ><span>{{ item.name }}</span
