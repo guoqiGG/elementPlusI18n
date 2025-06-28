@@ -1,10 +1,9 @@
 <template>
- 
-  <HelloWorld />
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component"></component>
+    </keep-alive>
+  </router-view>
 </template>
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
-<style scoped>
-</style>
+<script setup></script>
+<style scoped></style>
