@@ -67,7 +67,7 @@ export default defineConfig(({ mode }) => {
       /* CSS 预处理器   导入全局样式*/
       preprocessorOptions: {
         scss: {
-          // additionalData: '@import "src/styles/common.scss";',
+          api: 'modern-compiler', // 解决sass编译问题
         },
       },
     },
